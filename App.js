@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home, Products, Profile } from './pages'
+import { DetailProduct, Home, Products, Profile } from './pages'
 import { Text, View } from 'react-native';
 
 
@@ -70,7 +70,12 @@ function App() {
             // ...headerOptions
           }}
         />
-        <Stack.Screen name="Products" component={Products} options={{ headerShown: false }} />
+        <Stack.Screen name="Products" component={Products} />
+        <Stack.Screen
+          name="DetailProduct"
+          component={DetailProduct}
+          options={({ route }) => ({ title: route.params.nama })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
