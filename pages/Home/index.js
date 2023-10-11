@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -16,6 +16,11 @@ export default function HomeScreen() {
             <TouchableOpacity style={{ marginTop: 10, backgroundColor: 'pink', padding: 10 }} onPress={() => navigation.navigate('Products')}>
                 <Text>Go to Products</Text>
             </TouchableOpacity>
+
+            {/* <Button
+                title="Update the title"
+                onPress={() => navigation.setOptions({ title: 'Updated!' })}
+            /> */}
         </View>
     );
 }
