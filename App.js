@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DetailProduct, Home, Products, Profile } from './pages'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { MyTabBar } from './components'
+import { CustomDrawerContent, MyTabBar } from './components'
 import Ionicons from "@expo/vector-icons/Ionicons"
 
 const Stack = createNativeStackNavigator();
@@ -59,25 +59,26 @@ function MainDrawer() {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
-      screenOptions={({ route }) => ({
-        drawerActiveBackgroundColor: '#F0EDF7',
-        drawerActiveTintColor: '#6B52AD',
-        drawerIcon: ({ focused, color, size }) => {
-          let iconName;
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    // screenOptions={({ route }) => ({
+    //   drawerActiveBackgroundColor: '#F0EDF7',
+    //   drawerActiveTintColor: '#6B52AD',
+    //   drawerIcon: ({ focused, color, size }) => {
+    //     let iconName;
 
-          if (route.name === "Home") {
-            iconName = "home"
-          } else if (route.name === "Products") {
-            iconName = "cart"
-          } else {
-            iconName = "person"
-          }
+    //     if (route.name === "Home") {
+    //       iconName = "home"
+    //     } else if (route.name === "Products") {
+    //       iconName = "cart"
+    //     } else {
+    //       iconName = "person"
+    //     }
 
-          return <Ionicons name={iconName} size={size} color={color} />
-        },
-      })}
+    //     return <Ionicons name={iconName} size={size} color={color} />
+    //   },
+    // })}
     >
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Home" component={Home} options={{ title: "Beranda" }} />
       <Drawer.Screen name="Products" component={Products} />
       <Drawer.Screen name="Profile" component={Profile} />
     </Drawer.Navigator>

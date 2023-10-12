@@ -1,3 +1,4 @@
 import MyTabBar from './MyTabBar'
+import CustomDrawerContent from './CustomDrawerContent'
 
-export { MyTabBar }
+export { MyTabBar, CustomDrawerContent }
