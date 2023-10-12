@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DetailProduct, Home, Products, Profile } from './pages'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from "@expo/vector-icons/Ionicons"
+import { MyTabBar } from './components'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -13,25 +13,24 @@ const Tab = createBottomTabNavigator();
 function MainTab() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+      tabBar={props => <MyTabBar {...props} />}
+    // screenOptions={({ route }) => ({
+    //   tabBarIcon: ({ focused, color, size }) => {
+    //     let iconName;
 
-          if (route.name === "Home") {
-            iconName = "home"
-          } else if (route.name === "Products") {
-            iconName = "cart"
-          } else {
-            iconName = "person"
-          }
+    //     if (route.name === "Home") {
+    //       iconName = "home"
+    //     } else if (route.name === "Products") {
+    //       iconName = "cart"
+    //     } else {
+    //       iconName = "person"
+    //     }
 
-          return <Ionicons name={iconName} size={size} color={color} />
-        },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray'
-      })
-
-      }
+    //     return <Ionicons name={iconName} size={size} color={color} />
+    //   },
+    //   tabBarActiveTintColor: 'tomato',
+    //   tabBarInactiveTintColor: 'gray'
+    // })}
     >
       <Tab.Screen
         name="Home"
@@ -41,7 +40,7 @@ function MainTab() {
       <Tab.Screen
         name="Products"
         component={Products}
-        options={{ headerShown: false, tabBarBadge: 3 }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Profile"
