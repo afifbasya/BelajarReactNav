@@ -4,73 +4,64 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DetailProduct, Home, Products, Profile } from './pages'
-import { Text, View } from 'react-native';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from "@expo/vector-icons/Ionicons"
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-// const headerOptions = {
-//   headerStyle: {
-//     backgroundColor: 'pink'
-//   },
-//   headerTintColor: 'black',
-//   headerTitleStyle: {
-//     fontWeight: '300',
-//   },
-// }
-
-// function HeaderCustom(props) {
-//   return (
-//     <View>
-//       <Text>{props.children}</Text>
-//     </View>
-//   )
-// }
-
-function Notif() {
+function MainTab() {
   return (
-    <View>
-      <Text>Notif</Text>
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "Home") {
+            iconName = "home"
+          } else if (route.name === "Products") {
+            iconName = "cart"
+          } else {
+            iconName = "person"
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray'
+      })
+
+      }
+    >
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Products"
+        component={Products}
+        options={{ headerShown: false, tabBarBadge: 3 }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+
+    </Tab.Navigator>
   )
 }
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: 'pink'
-          },
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontWeight: '300',
-          },
-        }}
-      >
+      <Stack.Navigator>
         <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: "Aplikasi Saya",
-            headerRight: () => <Notif />
-            // ...headerOptions
-          }}
-        // options={{
-        //   headerTitle: (props) => <HeaderCustom {...props} />,
-        //   title: "Home Screen",
-        // }}
+          name='MainTab'
+          component={MainTab}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            title: "Profile Saya",
-            // ...headerOptions
-          }}
-        />
-        <Stack.Screen name="Products" component={Products} />
         <Stack.Screen
           name="DetailProduct"
           component={DetailProduct}

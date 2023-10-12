@@ -35,7 +35,7 @@ export default function Product() {
     const navigation = useNavigation();
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop: 30 }}>
             {products.map((product) => {
                 return (
                     <TouchableOpacity
